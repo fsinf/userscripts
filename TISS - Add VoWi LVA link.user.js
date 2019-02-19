@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     TISS: Add VoWi LVA link
 // @include  https://tiss.tuwien.ac.at/*
-// @version  1
+// @version  1.1
 // @grant    none
 // ==/UserScript==
 
@@ -17,7 +17,7 @@ locale = locale ? locale[1] : "de";
 
 
 // course overview: add VoWi link
-if (page == "course/educationDetails") {
+if (page == "course/educationDetails" || page == "course/courseDetails") {
   header = document.getElementById("subHeader").innerText;
   lvaTyp = /[0-9WS]{5}, ([^,]+),/gm.exec(header)[1];
 
