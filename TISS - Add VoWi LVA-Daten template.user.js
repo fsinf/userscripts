@@ -40,12 +40,17 @@ abteilung = $('h2:contains("Institut") + ul > li').text().replace(/E\d+/, "").re
 sprache = $('h2:contains("Sprache")')[0].nextSibling.textContent
 
 // Extract Semester
-currentSemester = $('#semesterForm option')[0].innerText
-lastSemester = $('#semesterForm option')[1].innerText
-if (currentSemester[currentSemester.length - 1] == lastSemester[lastSemester.length - 1]) {
-  semester = currentSemester[currentSemester.length - 1] + "S"
+semesters = $('#semesterForm option')
+currentSemester = semesters[0].innerText
+if (semesters.length > 1) {
+  lastSemester = $('#semesterForm option')[1].innerText
+  if (currentSemester[currentSemester.length - 1] == lastSemester[lastSemester.length - 1]) {
+    semester = currentSemester[currentSemester.length - 1] + "S"
+  } else {
+    semester = "beide"
+  }
 } else {
-  semester = "beide"
+  semester = currentSemester[currentSemester.length - 1] + "S"
 }
 
 // Extract Homepage
