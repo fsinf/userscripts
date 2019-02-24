@@ -2,6 +2,7 @@
 // @name TISS: Add VoWi "LVA-Daten" template to course page
 // @namespace https://vowi.fsinf.at/
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
+// @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none
 // ==/UserScript==
 
@@ -41,16 +42,24 @@ sprache = $('h2:contains("Sprache")')[0].nextSibling.textContent
 
 // Extract Semester
 semesters = $('#semesterForm option')
-currentSemester = semesters[0].innerText
-if (semesters.length > 1) {
-  lastSemester = $('#semesterForm option')[1].innerText
-  if (currentSemester[currentSemester.length - 1] == lastSemester[lastSemester.length - 1]) {
-    semester = currentSemester[currentSemester.length - 1] + "S"
+if (semesters.length > 0) {
+  // educationDetails
+  currentSemester = semesters[0].innerText
+  if (semesters.length > 1) {
+    // course has been offered in more than one Semester already
+    lastSemester = $('#semesterForm option')[1].innerText
+    if (currentSemester[currentSemester.length - 1] == lastSemester[lastSemester.length - 1]) {
+      semester = currentSemester[currentSemester.length - 1] + "S"
+    } else {
+      semester = "beide"
+    }
   } else {
-    semester = "beide"
+    // first time the course is held
+    semester = currentSemester[currentSemester.length - 1] + "S"
   }
 } else {
-  semester = currentSemester[currentSemester.length - 1] + "S"
+  // courseDetails
+  semester = ""
 }
 
 // Extract Homepage
