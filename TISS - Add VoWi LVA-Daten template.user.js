@@ -102,5 +102,5 @@ $('#contentInner > form').append(`
 <li><a href="https://vowi.fsinf.at/wiki/Spezial:ÄhnlichBenannteSeiten/${lvaTitle} ${lvaTyp}" target="_blank">${lvaTitle} ${lvaTyp}</a></li>
 <li><a href="https://vowi.fsinf.at/wiki/TU_Wien:${lvaTitle} ${lvaTyp} (${leiter})?action=edit" target="_blank">${lvaTitle} ${lvaTyp} (${leiter}) erstellen</a></li>
 </ul>
-<pre style="white-space: pre-wrap; font-size:11pt">${lvaDaten}</pre>
+<pre style="white-space: pre-wrap; font-size:11px">${lvaDaten}</pre>
 `)
