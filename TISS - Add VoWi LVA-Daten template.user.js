@@ -4,7 +4,7 @@
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none
-// @version 2.0
+// @version 2
 // ==/UserScript==
 
 if (document.getElementsByClassName("loading").length > 0) {
@@ -177,9 +177,7 @@ async function getModule(tissID) {
 }
 
 function filterModule(module) {
-  console.log(module);
   let trs = module.find((modul) => modul["studienkennzahl"] == "TRS") != null;
-  console.log(trs);
   if (!trs) {
     return module;
   } else {
