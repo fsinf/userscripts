@@ -12,7 +12,7 @@
 // Inspired by https://greasyfork.org/de/scripts/9914-tiss-enhancer/
 
 if (document.getElementsByClassName("loading").length > 0) {
-  // Don't run the script on sides which only contain the loading animation.
+  // Don't run the script on sites which only contain the loading animation.
   return;
 }
 
