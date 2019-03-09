@@ -91,7 +91,14 @@ function getAbteilung() {
 }
 
 function getSprache() {
-   return $("h2:contains('Sprache')")[0].nextSibling.textContent;
+  let sprache = $("h2:contains('Sprache')")[0].nextSibling.textContent;
+  if (sprache.match(/Bei Bedarf/)) {
+    return null;
+  } else if (sprache == "Deutsch") {
+    return "de";
+  } else if (sprache == "Englisch") {
+    return "en";
+  }
 }
 
 function getSemester() {
@@ -218,8 +225,7 @@ async function showLvaDaten() {
 | vortragende = ${vortragende.map((vortragender) => vortragender["wikiLink"]).join(", ")}
 | abteilung = ${abteilung}${homepage != undefined ? "\n| homepage = " + homepage : ""}
 | tiss = ${tissID.replace(".", "")}
-| wann = ${semester}
-| sprache = ${sprache}
+| wann = ${semester}${sprache != null ? "\n| sprache = " + sprache : ""}
 | zuordnungen =
     ${module.map((modul) => `{{Zuordnung|${modul["studienkennzahl"]}|${modul["name"]}${modul["wahl"] ? "|wahl=1" : ""}}}`).join("\n    ")}
 }}
