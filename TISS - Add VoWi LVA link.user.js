@@ -19,7 +19,7 @@ if (document.getElementsByClassName("loading").length > 0) {
 }
 
 function vowi_link(lvaTitle) {
-  return "https://vowi.fsinf.at/wiki/Spezial:ÄhnlichBenannteSeiten/" + encodeURIComponent(lvaTitle.replace(/ /g, '_'));
+  return "https://vowi.fsinf.at/LVA/" + encodeURIComponent(lvaTitle.replace(/ /g, '_'));
 }
 
 function mm_link(lvaTitle) {
@@ -43,11 +43,16 @@ if (page == "course/educationDetails" || page == "course/courseDetails") {
   var lvaTyp = /[0-9WS]{5}, ([^,]+),/gm.exec(header)[1];
 
   var heading = document.getElementById("contentInner").getElementsByTagName("h1")[0].innerText;
-  var lvaTitle = /^\s*[A-Z0-9\.]{7} (.*)$/gm.exec(heading)[1] + " " + lvaTyp;
+  var lvaTitle = /^\s*[A-Z0-9\.]{7} (.*)$/gm.exec(heading)[1];
+  var lvaVoWiTitle = lvaTitle + " " + lvaTyp;
 
   var ul = document.getElementById("contentInner").getElementsByClassName("bulletList")[0];
   var li = document.createElement("li");
-  li.innerHTML = '<a href="' + vowi_link(lvaTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' VoWi</a>';
+  li.innerHTML = '<a href="' + vowi_link(lvaVoWiTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' VoWi</a>';
+  ul.appendChild(li);
+
+  li = document.createElement("li");
+  li.innerHTML = '<a href="' + mm_link(lvaTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' Mattermost</a>';
   ul.appendChild(li);
 }
 
