@@ -6,7 +6,7 @@
 // @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/education/favorites.xhtml*
 // @grant       none
-// @version     1.4
+// @version     1.5
 // @downloadURL https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // @updateURL   https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // ==/UserScript==
