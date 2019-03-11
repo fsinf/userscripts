@@ -8,6 +8,7 @@
 // @grant       none
 // @version     1.2
 // @downloadURL https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
+// @updateURL   https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // ==/UserScript==
 
 // Inspired by https://greasyfork.org/de/scripts/9914-tiss-enhancer/
