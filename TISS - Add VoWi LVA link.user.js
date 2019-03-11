@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name     TISS: Add VoWi LVA link
+// @name        TISS: Add VoWi LVA link
 // @description Add link to LVA on VoWi in TISS on course page as well as in favorites.
-// @namespace https://vowi.fsinf.at/
-// @match    https://tiss.tuwien.ac.at/course/educationDetails.xhtml
-// @match    https://tiss.tuwien.ac.at/course/courseDetails.xhtml
-// @match    https://tiss.tuwien.ac.at/education/favorites.xhtml
-// @grant    none
-// @version  1.2
+// @namespace   https://vowi.fsinf.at/
+// @match       https://tiss.tuwien.ac.at/course/educationDetails.xhtml
+// @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml
+// @match       https://tiss.tuwien.ac.at/education/favorites.xhtml
+// @grant       none
+// @version     1.2
+// @downloadURL https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // ==/UserScript==
 
 // Inspired by https://greasyfork.org/de/scripts/9914-tiss-enhancer/
@@ -20,21 +21,21 @@ function vowi_link(lvaTitle) {
   return "https://vowi.fsinf.at/wiki/Spezial:ÄhnlichBenannteSeiten/" + encodeURIComponent(lvaTitle.replace(/ /g, '_'));
 }
 
-page = window.location.href.match(/tiss.tuwien.ac.at\/([\w\/]+)\.xhtml/i)[1];
-locale = document.cookie.match(/TISS_LANG=([\w-]+)/);
+var page = window.location.href.match(/tiss.tuwien.ac.at\/([\w\/]+)\.xhtml/i)[1];
+var locale = document.cookie.match(/TISS_LANG=([\w-]+)/);
 locale = locale ? locale[1] : "de";
 
 
 // course overview: add VoWi link
 if (page == "course/educationDetails" || page == "course/courseDetails") {
-  header = document.getElementById("subHeader").innerText;
-  lvaTyp = /[0-9WS]{5}, ([^,]+),/gm.exec(header)[1];
+  var header = document.getElementById("subHeader").innerText;
+  var lvaTyp = /[0-9WS]{5}, ([^,]+),/gm.exec(header)[1];
 
-  heading = document.getElementById("contentInner").getElementsByTagName("h1")[0].innerText;
-  lvaTitle = /^\s*[A-Z0-9\.]{7} (.*)$/gm.exec(heading)[1] + " " + lvaTyp;
+  var heading = document.getElementById("contentInner").getElementsByTagName("h1")[0].innerText;
+  var lvaTitle = /^\s*[A-Z0-9\.]{7} (.*)$/gm.exec(heading)[1] + " " + lvaTyp;
 
-  ul = document.getElementById("contentInner").getElementsByClassName("bulletList")[0];
-  li = document.createElement("li");
+  var ul = document.getElementById("contentInner").getElementsByClassName("bulletList")[0];
+  var li = document.createElement("li");
   li.innerHTML = '<a href="' + vowi_link(lvaTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' VoWi</a>';
   ul.appendChild(li);
 }
