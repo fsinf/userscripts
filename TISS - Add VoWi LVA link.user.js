@@ -52,7 +52,7 @@ if (page == "course/educationDetails" || page == "course/courseDetails") {
   ul.appendChild(li);
 
   li = document.createElement("li");
-  li.innerHTML = '<a href="' + mm_link(lvaTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' Mattermost</a>';
+  li.innerHTML = '<a href="' + mm_link(lvaTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' Mattermost-Channel</a>';
   ul.appendChild(li);
 }
 
