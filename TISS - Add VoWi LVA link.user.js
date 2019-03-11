@@ -22,6 +22,16 @@ function vowi_link(lvaTitle) {
   return "https://vowi.fsinf.at/wiki/Spezial:ÄhnlichBenannteSeiten/" + encodeURIComponent(lvaTitle.replace(/ /g, '_'));
 }
 
+function mm_link(lvaTitle) {
+    var channame = lvaTitle.toLowerCase().replace('ä','ae').replace('ö','oe').replace('ü','ue');
+    channame = channame.replace(/[^a-zA-Z0-9_]/g,'-');
+    channame = channame.replace(/-+/g,'-');
+    channame = channame.substring(0,63);
+    channame = channame.trim('-');
+
+    return "https://mattermost.fsinf.at/w-inf-tuwien/channels/" + encodeURIComponent(channame);
+}
+
 var page = window.location.href.match(/tiss.tuwien.ac.at\/([\w\/]+)\.xhtml/i)[1];
 var locale = document.cookie.match(/TISS_LANG=([\w-]+)/);
 locale = locale ? locale[1] : "de";
@@ -47,15 +57,16 @@ if (page == "education/favorites") {
     var titleCol = row.getElementsByClassName("favoritesTitleCol")[0];
     var lvaTitle = titleCol.getElementsByTagName("a")[0].text.trim();
     var lvaTyp = titleCol.querySelector("span[title='Typ']").textContent.match(/, ([^,]+),/)[1];
-    lvaTitle = lvaTitle + " " + lvaTyp;
+    var lvaVoWiTitle = lvaTitle + " " + lvaTyp;
+
 
     var a = document.createElement("a");
-    a.href = vowi_link(lvaTitle);
+    a.href = mm_link(lvaTitle);
     a.target = "_blank";
 
     var img = document.createElement("img");
-    img.src = "https://vowi.fsinf.at/favicon.ico";
-    img.title = "VoWi";
+    img.src = "https://mattermost.fsinf.at/static/favicon-16x16.png";
+    img.title = "Mattermost";
     img.width = 16;
     img.height = 16;
     img.style = "margin-right: 5px";
@@ -64,6 +75,23 @@ if (page == "education/favorites") {
 
     var favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
     favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
-    favoritesLinks.style = "width: 75px !important";
+
+
+    a = document.createElement("a");
+    a.href = vowi_link(lvaVoWiTitle);
+    a.target = "_blank";
+
+    img = document.createElement("img");
+    img.src = "https://vowi.fsinf.at/favicon.ico";
+    img.title = "VoWi";
+    img.width = 16;
+    img.height = 16;
+    img.style = "margin-right: 5px";
+
+    a.appendChild(img);
+
+    favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
+    favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
+    favoritesLinks.style = "width: 100px !important";
   });
 }
