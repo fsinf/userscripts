@@ -14,6 +14,7 @@ if (document.getElementsByClassName("loading").length > 0) {
 
 STUDIENKENNZAHL_BLACKLIST = [
   "E066011", // Erasmus
+  "E066950", // Informatikdidaktik
   "E033531", // Data Engineering & Statistics
   "E066933", // Information & Knowledge Management
   "860GW",   // Gebundene Wahlfächer - Technische Mathematik
