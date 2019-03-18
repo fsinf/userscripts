@@ -4,7 +4,7 @@
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none
-// @version 2
+// @version 2.1
 // ==/UserScript==
 
 if (document.getElementsByClassName("loading").length > 0) {
