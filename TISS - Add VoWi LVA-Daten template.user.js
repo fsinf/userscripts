@@ -144,7 +144,7 @@ function getWindowIdRequestTokenUrl(url) {
 }
 
 function getModulNameFromTissID(data, tissID) {
-  return $(`.courseKey:contains('${tissID}')`, data).parents("tr").prevAll("tr:has(.nodeTable-level-2)").first().find(".bold").text();
+  return $(`.courseKey:contains('${tissID}')`, data).parents("tr").prevAll("tr:has(.nodeTable-level-2)").first().find(".bold").text().replace(/(Wahl|Pflicht)?[Mm]odul /, "");
 }
 
 async function getModule(tissID) {
