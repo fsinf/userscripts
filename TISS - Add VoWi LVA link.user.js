@@ -70,7 +70,7 @@ if (page == "education/favorites") {
     a.target = "_blank";
 
     var img = document.createElement("img");
-    img.src = "https://mattermost.fsinf.at/static/favicon-32x32.png";
+    img.src = "https://mattermost.fsinf.at/static/images/favicon/favicon-32x32.png";
     img.title = "Mattermost";
     img.width = 16;
     img.height = 16;
