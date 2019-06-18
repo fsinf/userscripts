@@ -6,7 +6,7 @@
 // @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/education/favorites.xhtml*
 // @grant       none
-// @version     1.7
+// @version     1.8
 // @downloadURL https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // @updateURL   https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
 // ==/UserScript==
@@ -18,8 +18,8 @@ if (document.getElementsByClassName("loading").length > 0) {
   return;
 }
 
-function vowi_link(lvaTitle) {
-  return "https://vowi.fsinf.at/LVA/" + encodeURIComponent(lvaTitle.replace(/ /g, '_'));
+function vowi_link(tissID) {
+  return "https://vowi.fsinf.at/wiki/Spezial:CourseById?ns=TU_Wien&id=" + tissID;
 }
 
 function mm_link(lvaTitle) {
@@ -40,15 +40,14 @@ locale = locale ? locale[1] : "de";
 // course overview: add VoWi link
 if (page == "course/educationDetails" || page == "course/courseDetails") {
   var header = document.getElementById("subHeader").innerText;
-  var lvaTyp = /[0-9WS]{5}, ([^,]+),/gm.exec(header)[1];
 
   var heading = document.getElementById("contentInner").getElementsByTagName("h1")[0].innerText;
   var lvaTitle = /^\s*[A-Z0-9\.]{7} (.*)$/gm.exec(heading)[1];
-  var lvaVoWiTitle = lvaTitle + " " + lvaTyp;
+  var tissID = /^\s*([A-Z0-9.]{7})\s+(.*)$/gm.exec(heading)[1].replace(".", "");
 
   var ul = document.getElementById("contentInner").getElementsByClassName("bulletList")[0];
   var li = document.createElement("li");
-  li.innerHTML = '<a href="' + vowi_link(lvaVoWiTitle) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' VoWi</a>';
+  li.innerHTML = '<a href="' + vowi_link(tissID) + '" target="_blank">' + (locale == "de" ? "Zum" : "To") + ' VoWi</a>';
   ul.appendChild(li);
 
   li = document.createElement("li");
@@ -61,9 +60,7 @@ if (page == "education/favorites") {
   Array.from(document.querySelectorAll("tr.ui-widget-content")).forEach(function(row, index) {
     var titleCol = row.getElementsByClassName("favoritesTitleCol")[0];
     var lvaTitle = titleCol.getElementsByTagName("a")[0].text.trim();
-    var lvaTyp = titleCol.querySelector("span[title='Typ']").textContent.match(/, ([^,]+),/)[1];
-    var lvaVoWiTitle = lvaTitle + " " + lvaTyp;
-
+    var tissID = titleCol.querySelector("span[title='LVA Nr.']").textContent.replace(".", "");
 
     var a = document.createElement("a");
     a.href = mm_link(lvaTitle);
@@ -81,9 +78,8 @@ if (page == "education/favorites") {
     var favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
     favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
 
-
     a = document.createElement("a");
-    a.href = vowi_link(lvaVoWiTitle);
+    a.href = vowi_link(tissID);
     a.target = "_blank";
 
     img = document.createElement("img");
