@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        TISS: Add VoWi LVA link
+// @name        VoWi and Mattermost links in TISS
 // @description Add links to VoWi pages and Mattermost channels to TISS courses.
 // @namespace   https://fsinf.at/
 // @match       https://tiss.tuwien.ac.at/course/educationDetails.xhtml*
@@ -58,7 +58,7 @@ if (page == "education/favorites") {
   Array.from(document.querySelectorAll("tr.ui-widget-content")).forEach(function(row, index) {
     var titleCol = row.getElementsByClassName("favoritesTitleCol")[0];
     var lvaTitle = titleCol.getElementsByTagName("a")[0].text.trim();
-    var tissID = titleCol.querySelector("span[title='LVA Nr.']").textContent.replace(".", "");
+    var tissID = titleCol.querySelector("span[title='LVA Nr.'],span[title='Course Nr.']").textContent.replace(".", "");
 
     var a = document.createElement("a");
     a.href = mm_link(lvaTitle);
