@@ -25,7 +25,7 @@ function mm_link(lvaTitle) {
     channame = channame.replace(/[^a-zA-Z0-9_]/g,'-');
     channame = channame.replace(/-+/g,'-');
     channame = channame.substring(0,63);
-    channame = channame.trim('-');
+    channame = channame.replace(/-$/, '');
 
     return "https://mattermost.fsinf.at/w-inf-tuwien/channels/" + encodeURIComponent(channame);
 }
