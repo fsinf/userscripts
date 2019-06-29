@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name TISS: Add VoWi "LVA-Daten" template to course page
-// @namespace https://vowi.fsinf.at/
+// @namespace https://fsinf.at/
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none

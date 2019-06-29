@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name TISS Search in VoWi
-// @namespace https://vowi.fsinf.at/
+// @namespace https://fsinf.at/
 // @match https://vowi.fsinf.at/wiki/*
 // @match https://tiss.tuwien.ac.at/course/courseList.xhtml*
 // @description Does not work with Greasemonkey because of https://github.com/greasemonkey/greasemonkey/issues/2700

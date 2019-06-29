@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name        TISS: Add VoWi LVA link
-// @description Add link to LVA on VoWi in TISS on course page as well as in favorites.
-// @namespace   https://vowi.fsinf.at/
+// @description Add links to VoWi pages and Mattermost channels to TISS courses.
+// @namespace   https://fsinf.at/
 // @match       https://tiss.tuwien.ac.at/course/educationDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/education/favorites.xhtml*
 // @grant       none
-// @version     1.8
-// @downloadURL https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
-// @updateURL   https://github.com/Lukas0907/tuwgm/raw/master/TISS%20-%20Add%20VoWi%20LVA%20link.user.js
+// @version     1.8.1
 // ==/UserScript==
 
 // Inspired by https://greasyfork.org/de/scripts/9914-tiss-enhancer/
