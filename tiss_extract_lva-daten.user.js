@@ -4,7 +4,9 @@
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none
-// @version 2.1
+// @version 2.2
+// @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
+// @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
 // ==/UserScript==
 
 if (document.getElementsByClassName("loading").length > 0) {

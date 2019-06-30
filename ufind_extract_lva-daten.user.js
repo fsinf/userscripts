@@ -5,7 +5,9 @@
 // @match https://ufind.univie.ac.at/en/course.html
 // @description Does not work with Greasemonkey because of https://github.com/greasemonkey/greasemonkey/issues/2700
 // @grant none
-// @version 1.0
+// @version 1.1
+// @downloadURL https://github.com/fsinf/userscripts/raw/master/ufind_extract_lva-daten.user.js
+// @updateURL https://github.com/fsinf/userscripts/raw/master/ufind_extract_lva-daten.user.js
 // ==/UserScript==
 
 function vowiLink(ns, id) {
