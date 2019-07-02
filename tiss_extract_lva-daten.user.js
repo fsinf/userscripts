@@ -4,7 +4,7 @@
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @grant none
-// @version 2.2
+// @version 2.2.1
 // @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
 // @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
 // ==/UserScript==
@@ -227,7 +227,7 @@ async function showLvaDaten() {
 | ects = ${ects}
 | vortragende = ${vortragende.map((vortragender) => vortragender["wikiLink"]).join(", ")}
 | abteilung = ${abteilung}${homepage != undefined ? "\n| homepage = " + homepage : ""}
-| tiss = ${tissID.replace(".", "")}
+| id = ${tissID.replace(".", "")}
 | wann = ${semester}${sprache != null ? "\n| sprache = " + sprache : ""}
 | zuordnungen =
     ${module.map((modul) => `{{Zuordnung|${modul["studienkennzahl"]}|${modul["name"]}${modul["wahl"] ? "|wahl=1" : ""}}}`).join("\n    ")}
