@@ -1,17 +1,51 @@
 // ==UserScript==
-// @name TISS: Add VoWi "LVA-Daten" template to course page
+// @name TISS: Extract VoWi templates
 // @namespace https://fsinf.at/
 // @match https://tiss.tuwien.ac.at/course/educationDetails.xhtml
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
+// @match https://tiss.tuwien.ac.at/curriculum/public/curriculum.xhtml
 // @grant none
-// @version 2.2.1
-// @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
-// @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_lva-daten.user.js
+// @version 2.2.2
+// @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
+// @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
 // ==/UserScript==
 
 if (document.getElementsByClassName("loading").length > 0) {
   // Don't run the script on sites which only contain the loading animation.
   return;
+}
+
+function extractCurriculumData(){
+  let data = {};
+  let matches = /(\d{3} \d{3})?(.+)/.exec($("#contentInner h1").text());
+  if (matches[1])
+    data.id = 'E' + matches[1].replace(' ', '');
+  let titleWords = matches[2].trim().split(' ');
+  if (titleWords[0].endsWith('studium')){
+    data.typ = titleWords.shift().replace('sstudium', '').replace('studium', '');
+    data.name = titleWords.join(' ');
+  } else {
+    data.typ = 'Katalog'
+    data.name = matches[2].trim();
+  }
+
+  data.tiss = new URL(location).searchParams.get('key');
+  var legalLink = $('a[id$=legalTextLink]');
+  if (legalLink.length > 0)
+    data.plan = legalLink[0].href;
+  return data;
+}
+
+if (location.pathname.startsWith('/curriculum/public/')){
+  $('#subHeader').append($('<button>VoWi-Vorlage</button>').click(function(){
+    let data = extractCurriculumData();
+    $(this).replaceWith($('<pre>').html(`
+{{Katalog-Daten
+|typ=${data.typ}
+|name=${data.name}${data.plan ? '\n|plan=' + data.plan : ''}
+|tiss=${data.tiss}
+}}`))
+  }));
 }
 
 STUDIENKENNZAHL_BLACKLIST = [
