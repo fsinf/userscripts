@@ -4,7 +4,7 @@
 // @match https://vowi.fsinf.at/wiki/*
 // @match https://tiss.tuwien.ac.at/course/courseList.xhtml*
 // @description Does not work with Greasemonkey because of https://github.com/greasemonkey/greasemonkey/issues/2700
-// @version 1.2
+// @version 1.3
 // @downloadURL https://github.com/fsinf/userscripts/raw/master/vowi_to_tiss_search.user.js
 // @updateURL https://github.com/fsinf/userscripts/raw/master/vowi_to_tiss_search.user.js
 // ==/UserScript==
@@ -12,10 +12,12 @@
 if (location.host == 'vowi.fsinf.at') {
 	if (document.getElementById('lva-daten') != null) {
 		var content = document.getElementById('mw-content-text');
+		var div = document.createElement('div');
+		content.insertBefore(div, content.firstChild);
 		var a = document.createElement('a');
+		div.insertBefore(a, div.firstChild);
 		a.setAttribute('target', '_blank');
 		a.innerHTML = 'TISS Suche';
-		content.insertBefore(a, content.firstChild);
 		var heading = document.getElementById('firstHeading').innerHTML;
 		var title = encodeURIComponent(heading.substring(heading.indexOf(':') + 1, heading.indexOf('(') - 4));
 		var type = encodeURIComponent(heading.substr(heading.indexOf('(') - 3, 2));
