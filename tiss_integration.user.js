@@ -6,7 +6,7 @@
 // @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/education/favorites.xhtml*
 // @grant       none
-// @version     1.9
+// @version     1.10
 // @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_integration.user.js
 // @updateURL   https://github.com/fsinf/userscripts/raw/master/tiss_integration.user.js
 // ==/UserScript==
