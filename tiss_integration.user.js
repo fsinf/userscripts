@@ -134,6 +134,7 @@ if (page == "education/favorites") {
     var img = document.createElement("img");
     img.src = "https://mattermost.fsinf.at/static/images/favicon/favicon-32x32.png";
     img.title = "Mattermost";
+    img.alt = "Mattermost";
     img.width = 16;
     img.height = 16;
     img.style = "margin-right: 5px";
@@ -150,6 +151,7 @@ if (page == "education/favorites") {
     img = document.createElement("img");
     img.src = "https://vowi.fsinf.at/favicon.ico";
     img.title = "VoWi";
+    img.alt = "VoWi";
     img.width = 16;
     img.height = 16;
     img.style = "margin-right: 5px";
