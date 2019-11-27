@@ -5,7 +5,7 @@
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @match https://tiss.tuwien.ac.at/curriculum/public/curriculum.xhtml
 // @grant none
-// @version 2.2.2
+// @version 2.2.3
 // @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
 // @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
 // ==/UserScript==
@@ -83,12 +83,11 @@ function getLvaTyp() {
 
 function getVortragende() {
   let vortragende = [];
-  $.each($("h2:contains('Vortragende') + ul > li"), (key, value) => {
-    let a = $(value).find("a");
-    let vortragender = a.text().split(", ");
+  $.each($("h2:contains('Vortragende') + ul a"), (key, link) => {
+    let vortragender = link.innerText.split(", ");
     vortragender.reverse();
     vortragender = vortragender.join(" ");
-    let personId = /(\d+)/.exec(a.attr("href"))[1];
+    let personId = /(\d+)/.exec(link.href)[1];
     vortragende.push({
       wikiLink: `[[tiss.person:${personId}|${vortragender}]]`,
       name: vortragender,
