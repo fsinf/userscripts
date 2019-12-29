@@ -4,10 +4,11 @@
 // @namespace   https://fsinf.at/
 // @match       https://oc-presentation.ltcc.tuwien.ac.at/*
 // @match       https://oase.it.tuwien.ac.at/AuthServ.authenticate
+// @match       https://toss.fsinf.at/
 // @grant       none
-// @version     1.01
-// @downloadURL https://fsinf.at/tes
-// @updateURL   https://fsinf.at/tes
+// @version     1.02
+// @downloadURL https://fsinf.at/tes.user.js
+// @updateURL   https://fsinf.at/tes.user.js
 // ==/UserScript==
 
 async function openCastAutoLogin(){
@@ -32,4 +33,6 @@ if (location.host == 'oc-presentation.ltcc.tuwien.ac.at'){
 } else if (location.host == 'oase.it.tuwien.ac.at'){
 	if (document.querySelector('input[name="pw"]').value)
 		document.querySelector('form[action="AuthServ.portal"]').submit()
+} else if (location.host == 'toss.fsinf.at'){
+	hasTES = true;
 }
