@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        TUW Enhancement Suite
-// @description Autologin for TISS and OpenCast.
+// @description Autologin for OpenCast and Single Sign-On.
 // @namespace   https://fsinf.at/
-// @match       https://tiss.tuwien.ac.at/*
 // @match       https://oc-presentation.ltcc.tuwien.ac.at/*
+// @match       https://oase.it.tuwien.ac.at/AuthServ.authenticate
 // @grant       none
-// @version     1.00
+// @version     1.01
 // @downloadURL https://fsinf.at/tes
 // @updateURL   https://fsinf.at/tes
 // ==/UserScript==
@@ -29,10 +29,7 @@ if (location.host == 'oc-presentation.ltcc.tuwien.ac.at'){
 	} else {
 		openCastAutoLogin();
 	}
-} else if (location.host == 'tiss.tuwien.ac.at'){
-	if (document.title != 'Loading...'){
-		let login = document.querySelector('.toolLogin');
-		if (login)
-			login.click();
-	}
+} else if (location.host == 'oase.it.tuwien.ac.at'){
+	if (document.querySelector('input[name="pw"]').value)
+		document.querySelector('form[action="AuthServ.portal"]').submit()
 }
