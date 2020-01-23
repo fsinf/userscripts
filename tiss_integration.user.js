@@ -121,6 +121,7 @@ if (page == "education/favorites") {
   `;
   tuwelTemplate.alt = "TUWEL";
   tuwelTemplate.title = "TUWEL";
+  tuwelTemplate.style = "margin-right: 5px";
 
   Array.from(document.querySelectorAll("tr.ui-widget-content")).forEach(function(row, index) {
     var titleCol = row.getElementsByClassName("favoritesTitleCol")[0];
