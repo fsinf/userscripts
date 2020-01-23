@@ -161,7 +161,7 @@ if (page == "education/favorites") {
 
     favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
     favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
-    favoritesLinks.style = "width: 100px !important";
+    favoritesLinks.style = "width: 120px !important";
 
     var tuwel = row.querySelector("img[title='TUWEL']");
     if (tuwel !== null) {
