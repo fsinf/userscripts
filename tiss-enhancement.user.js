@@ -6,9 +6,9 @@
 // @match       https://tiss.tuwien.ac.at/course/courseDetails.xhtml*
 // @match       https://tiss.tuwien.ac.at/education/favorites.xhtml*
 // @grant       none
-// @version     1.11
-// @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_integration.user.js
-// @updateURL   https://github.com/fsinf/userscripts/raw/master/tiss_integration.user.js
+// @version     1.12
+// @downloadURL https://fsinf.at/userscripts/tiss-enhancement.user.js
+// @updateURL   https://fsinf.at/userscripts/tiss-enhancement.user.js
 // ==/UserScript==
 
 // Inspired by https://greasyfork.org/de/scripts/9914-tiss-enhancer/

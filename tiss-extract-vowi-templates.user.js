@@ -5,9 +5,9 @@
 // @match https://tiss.tuwien.ac.at/course/courseDetails.xhtml
 // @match https://tiss.tuwien.ac.at/curriculum/public/curriculum.xhtml
 // @grant none
-// @version 2.2.3
-// @downloadURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
-// @updateURL https://github.com/fsinf/userscripts/raw/master/tiss_extract_vowi_templates.user.js
+// @version 2.2.4
+// @downloadURL https://fsinf.at/userscripts/tiss-extract-vowi-templates.user.js
+// @updateURL   https://fsinf.at/userscripts/tiss-extract-vowi-templates.user.js
 // ==/UserScript==
 
 if (document.getElementsByClassName("loading").length > 0) {

@@ -4,9 +4,9 @@
 // @match https://vowi.fsinf.at/wiki/*
 // @match https://tiss.tuwien.ac.at/course/courseList.xhtml*
 // @description Does not work with Greasemonkey because of https://github.com/greasemonkey/greasemonkey/issues/2700
-// @version 1.3
-// @downloadURL https://github.com/fsinf/userscripts/raw/master/vowi_to_tiss_search.user.js
-// @updateURL https://github.com/fsinf/userscripts/raw/master/vowi_to_tiss_search.user.js
+// @version 1.4
+// @downloadURL https://fsinf.at/userscripts/vowi-link-tiss-search.user.js
+// @updateURL   https://fsinf.at/userscripts/vowi-link-tiss-search.user.js
 // ==/UserScript==
 
 if (location.host == 'vowi.fsinf.at') {

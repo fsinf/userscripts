@@ -3,7 +3,7 @@
 // @namespace   https://fsinf.at/
 // @match       https://tuwel.tuwien.ac.at/mod/forum/discuss.php
 // @grant       none
-// @version     1.0
+// @version     1.1
 // ==/UserScript==
 
 var courseId = document.querySelector(".forumsearch form > input").value
