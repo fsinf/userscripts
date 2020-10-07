@@ -123,6 +123,21 @@ if (page == "education/favorites") {
   tuwelTemplate.title = "TUWEL";
   tuwelTemplate.style = "margin-right: 5px";
 
+  var dlTemplate = document.createElement("img");
+  dlTemplate.src = `
+    data:image/png;base64,
+    iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
+    WXMAAC4jAAAuIwF4pT92AAABXUlEQVQ4y+2Tv0tCURzFP+/1VEoypCHCSAeJECGMpppaJHFpF6Kx
+    SWgQ+gcCh4aamiUborEIJCKMIIrAUpFCLLUfDipiIijos0HUTIJKh4bOdO/l8Ll8z7lXwHlQowcS
+    6ZH+HkhqLFwmLSpRIJgqYhxWcZosECi1x+cyaVGKMuvhfAdIaISddVvRKCT2jiM4bGYq1QpX4Tgr
+    u3eEynVz1m1lUFFGuervmEX6uKlRwhdKU6mFmbOMMTtlxKMSmd6O/DSjKjtPRZZ9ceY3L8gUy1gm
+    9SzphN+H/VyqEnvJAX3MGIa6a02W62GLotgdSDeiASCayn+//laPAouj/TjtE4xr1SRTKbaiVRDa
+    rzdI9YOCXCMrfwIJqPHa9DhsZgBe01nWPLdtEAE13gVD03N0HsS+n2yB/NcJBiSRUCLP4dk9wccM
+    Gzc5cnIL0vQk85xcPgAQiL21P8j/3/+l3gFrvHeTUEQuDAAAAABJRU5ErkJggg==
+  `;
+  dlTemplate.alt = "Distance Learning";
+  dlTemplate.style = "vertical-align: bottom";
+
   Array.from(document.querySelectorAll("tr.ui-widget-content")).forEach(function(row, index) {
     var titleCol = row.getElementsByClassName("favoritesTitleCol")[0];
     var lvaTitle = titleCol.getElementsByTagName("a")[0].text.trim();
@@ -167,6 +182,11 @@ if (page == "education/favorites") {
     if (tuwel !== null) {
       tuwel.parentElement.target = "_blank";
       tuwel.replaceWith(tuwelTemplate.cloneNode(false));
+    }
+
+    var dl = row.querySelector("img[alt='Distance Learning']");
+    if (dl !== null) {
+      dl.replaceWith(dlTemplate.cloneNode(false));
     }
   });
 }
