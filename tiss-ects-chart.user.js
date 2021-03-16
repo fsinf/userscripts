@@ -91,10 +91,13 @@ var chart = new Chart(d, {
 
     options: {
         scales: {
-            y: {
-                min: 0,
-                suggestedMax: 30
-            }
+            yAxes: [{
+                display: true,
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 30
+                }
+            }]
         }
     }
 });
