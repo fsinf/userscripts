@@ -67,7 +67,7 @@ for ( var i = 0; i < ects_tried.length; i++ ) {
         'term': ects_tried[i][0],
         'tried': ects_tried[i][1],
         'passed': pass,
-        'avg': sum / (i+1)
+        'avg': (sum / (i+1)).toFixed(2)
     });
 }
 
