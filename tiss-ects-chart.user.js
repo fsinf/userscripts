@@ -57,12 +57,17 @@ var ects_passed = d3.rollup(data_passed, v => d3.sum(v, d => d.ects), d => d.ter
 ects_tried = [...ects_tried.entries()].sort()
 
 var ects_data = []
+var sum = 0;
 for ( var i = 0; i < ects_tried.length; i++ ) {
     var pass = ects_passed.get(ects_tried[i][0]);
+    pass = (pass == undefined) ? 0 : pass
+    sum += pass;
+
     ects_data.push({
         'term': ects_tried[i][0],
         'tried': ects_tried[i][1],
-        'passed': (pass == undefined) ? 0 : pass
+        'passed': pass,
+        'avg': sum / (i+1)
     });
 }
 
@@ -86,6 +91,11 @@ var chart = new Chart(d, {
             fill: false,
             borderColor: 'rgb(0, 204, 102)',
             data: ects_data.map(function(d) { return d.passed })
+        }, {
+            label: 'Avg',
+            fill: false,
+            borderColor: 'rgb(0, 102, 255)',
+            data: ects_data.map(function(d) { return d.avg })
         }]
     },
 
