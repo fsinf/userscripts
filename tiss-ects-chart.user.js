@@ -115,13 +115,13 @@ var ects_line_chart = new Chart(canvas_ects_line.getContext("2d"), {
         datasets: [{
             label: 'Passed',
             fill: false,
-            cubicInterpolationMode: 'monotone'
+            cubicInterpolationMode: 'monotone',
             borderColor: 'rgb(0, 204, 102)',
             data: ects_data.map(function(d) { return d.passed })
         }, {
             label: 'Tried',
             fill: false,
-            cubicInterpolationMode: 'monotone'
+            cubicInterpolationMode: 'monotone',
             borderColor: 'rgb(255, 99, 132)',
             data: ects_data.map(function(d) { return d.tried })
         }, {
@@ -160,7 +160,7 @@ var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
         datasets: [{
             label: 'Weighted GPA by ECTS / Term',
             fill: false,
-            cubicInterpolationMode: 'monotone'
+            cubicInterpolationMode: 'monotone',
             borderColor: 'rgb(255, 102, 255)',
             data: ects_data.map(function(d) { return d.grade_avg })
         }, {
