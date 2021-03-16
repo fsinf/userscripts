@@ -115,13 +115,13 @@ var ects_line_chart = new Chart(canvas_ects_line.getContext("2d"), {
         datasets: [{
             label: 'Passed',
             fill: false,
-            lineTension: 0,
+            cubicInterpolationMode: 'monotone'
             borderColor: 'rgb(0, 204, 102)',
             data: ects_data.map(function(d) { return d.passed })
         }, {
             label: 'Tried',
             fill: false,
-            lineTension: 0,
+            cubicInterpolationMode: 'monotone'
             borderColor: 'rgb(255, 99, 132)',
             data: ects_data.map(function(d) { return d.tried })
         }, {
@@ -158,13 +158,13 @@ var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
     data: {
         labels: ects_data.map(function(d) { return d.term }),
         datasets: [{
-            label: 'Weighted GPA (passed courses) by ECTS / Term',
+            label: 'Weighted GPA by ECTS / Term',
             fill: false,
-            lineTension: 0,
+            cubicInterpolationMode: 'monotone'
             borderColor: 'rgb(255, 102, 255)',
             data: ects_data.map(function(d) { return d.grade_avg })
         }, {
-            label: 'Weighted GPA (passed courses) by ECTS / Total',
+            label: 'Weighted GPA by ECTS / Total',
             fill: false,
             borderColor: 'rgb(0,0,0)',
             data: ects_data.map(function(d) { return d.grade_mavg })
@@ -174,7 +174,7 @@ var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
     options: {
         title: {
             display: true,
-            text: 'GPA over time'
+            text: 'GPA over time (passed courses)'
         },
         scales: {
             yAxes: [{
