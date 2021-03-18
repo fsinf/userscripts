@@ -5,7 +5,7 @@
 // @require     https://cdn.jsdelivr.net/npm/chart.js@2.8.0
 // @description add charts to TISS certificates
 // @include     https://tiss.tuwien.ac.at/graduation/certificates.xhtml*
-// @version     1.1
+// @version     1.2
 // @downloadURL https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // @updateURL   https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // ==/UserScript==
@@ -103,11 +103,25 @@ for ( var i = 0; i < ects_tried.length; i++ ) {
     });
 }
 
+const canvas_container = document.createElement("div");
 
-var canvas_ects_line = document.createElement("canvas");
-//document.querySelector("#certificateList\\:certificatesPanel").appendChild(canvas);
-document.querySelector("#certificateList\\:studentInfoPanel").appendChild(canvas_ects_line);
-var ects_line_chart = new Chart(canvas_ects_line.getContext("2d"), {
+function newChartContext(){
+  var canvas = document.createElement("canvas");
+  var canvas_wrapper = document.createElement('div');
+  canvas_wrapper.className = 'cool-chart';
+  canvas_wrapper.style.width = '33%';
+  canvas_wrapper.style.minHeight = '200px';
+  canvas_wrapper.style.display = 'inline-block';
+  canvas_wrapper.appendChild(canvas);
+  canvas_container.appendChild(canvas_wrapper);
+  return canvas.getContext("2d");
+}
+
+const style = document.createElement("style");
+style.textContent = '@media (max-width: 800px) {.cool-chart {width: 100% !important;}}';
+document.body.appendChild(style);
+
+var ects_line_chart = new Chart(newChartContext(), {
     type: 'line',
 
     data: {
@@ -137,6 +151,7 @@ var ects_line_chart = new Chart(canvas_ects_line.getContext("2d"), {
             display: true,
             text: 'ECTS over time'
         },
+        maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 display: true,
@@ -149,10 +164,8 @@ var ects_line_chart = new Chart(canvas_ects_line.getContext("2d"), {
     }
 });
 
-var canvas_grade_line = document.createElement("canvas");
-//document.querySelector("#certificateList\\:certificatesPanel").appendChild(canvas);
-document.querySelector("#certificateList\\:studentInfoPanel").appendChild(canvas_grade_line);
-var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
+
+var grade_line_chart = new Chart(newChartContext(), {
     type: 'line',
 
     data: {
@@ -176,6 +189,7 @@ var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
             display: true,
             text: 'GPA over time (passed courses)'
         },
+        maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 display: true,
@@ -188,9 +202,7 @@ var grade_line_chart = new Chart(canvas_grade_line.getContext("2d"), {
     }
 });
 
-var canvas_bar = document.createElement("canvas");
-document.querySelector("#certificateList\\:studentInfoPanel").appendChild(canvas_bar);
-var ects_cumsum_chart = new Chart(canvas_bar.getContext("2d"), {
+var ects_cumsum_chart = new Chart(newChartContext(), {
     type: 'bar',
 
     data: {
@@ -207,9 +219,12 @@ var ects_cumsum_chart = new Chart(canvas_bar.getContext("2d"), {
     },
 
     options: {
+        maintainAspectRatio: false,
         title: {
             display: true,
             text: 'Cummulative ECTS'
         }
     }
 });
+
+document.querySelector("#certificateList\\:studentInfoPanel").appendChild(canvas_container);
