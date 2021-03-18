@@ -5,7 +5,7 @@
 // @require     https://cdn.jsdelivr.net/npm/chart.js@2.8.0
 // @description add charts to TISS certificates
 // @include     https://tiss.tuwien.ac.at/graduation/certificates.xhtml*
-// @version     1
+// @version     1.1
 // @downloadURL https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // @updateURL   https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // ==/UserScript==
