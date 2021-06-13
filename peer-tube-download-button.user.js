@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         TUWpeerTube_DownloadButton
-// @namespace    https://fabianscherer.de/
+// @namespace    https://vowi.fsinf.at/
 // @version      1.0
 // @description  Adds a download button for the videos in "https://tube1.it.tuwien.ac.at/videos/watch"
 // @author       Fabian Scherer
@@ -8,7 +8,8 @@
 // @icon         https://tube1.it.tuwien.ac.at/client/assets/images/favicon.png
 // @grant        GM_openInTab
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
-// @downloadURL  https://fabianscherer.de/verschiedenes/TUWpeerTube_DownloadButton/TUWpeerTube_DownloadButton.user.js
+// @downloadURL  https://fsinf.at/userscripts/peer-tube-download-button.user.js
+// @updateURL    https://fsinf.at/userscripts/peer-tube-download-button.user.js
 // ==/UserScript==
 
 
