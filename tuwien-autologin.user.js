@@ -7,7 +7,7 @@
 // @match       https://oase.it.tuwien.ac.at/AuthServ.authenticate
 // @match       https://toss.fsinf.at/
 // @grant       none
-// @version     1.5
+// @version     1.6
 // @downloadURL https://fsinf.at/userscripts/tuwien-autologin.user.js
 // @updateURL   https://fsinf.at/userscripts/tuwien-autologin.user.js
 // ==/UserScript==
@@ -50,7 +50,7 @@ switch(location.host){
 
 	case 'tuwel.tuwien.ac.at':
 		if (location.pathname == "/theme/university_boost/login/index.php") {
-			document.querySelector("a[title='TU Wien Login'] button").click();
+			document.querySelector("a[title='TU Wien Login']").click();
 		} else {
 			tuwelRefreshSession();
 		}
