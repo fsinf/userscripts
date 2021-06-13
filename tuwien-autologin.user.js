@@ -50,7 +50,7 @@ switch(location.host){
 
 	case 'tuwel.tuwien.ac.at':
 		if (location.pathname == "/theme/university_boost/login/index.php") {
-			document.querySelector("a[title='TU Wien Login'] button").click();
+			document.querySelector("a[title='TU Wien Login']").click();
 		} else {
 			tuwelRefreshSession();
 		}
