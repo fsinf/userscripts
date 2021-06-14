@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         TUWpeerTube_DownloadButton
+// @name         Re-enable TUpeerTube download button
 // @namespace    https://vowi.fsinf.at/
 // @version      1.0
-// @description  Adds a download button for the videos in "https://tube1.it.tuwien.ac.at/videos/watch"
+// @description  Re-enables the download button for TUpeerTube videos, for videos where they were disabled.
 // @author       Fabian Scherer
 // @match        https://tube1.it.tuwien.ac.at/videos/watch/*
 // @icon         https://tube1.it.tuwien.ac.at/client/assets/images/favicon.png
