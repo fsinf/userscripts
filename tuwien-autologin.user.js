@@ -4,10 +4,10 @@
 // @include     https://tiss.tuwien.ac.at/*
 // @include     https://tuwel.tuwien.ac.at/*
 // @include     https://oc-presentation.ltcc.tuwien.ac.at/*
-// @match       https://oase.it.tuwien.ac.at/AuthServ.authenticate
+// @match       https://idp.zid.tuwien.ac.at/simplesaml/module.php/core/loginuserpass.php
 // @match       https://toss.fsinf.at/
 // @grant       none
-// @version     1.6
+// @version     1.7
 // @downloadURL https://fsinf.at/userscripts/tuwien-autologin.user.js
 // @updateURL   https://fsinf.at/userscripts/tuwien-autologin.user.js
 // ==/UserScript==
@@ -31,9 +31,9 @@ async function openCastAutoLogin(){
 }
 
 switch(location.host){
-	case 'oase.it.tuwien.ac.at':
-		if (document.querySelector('input[name="pw"]').value)
-			document.querySelector('form[action="AuthServ.portal"]').submit()
+	case 'idp.zid.tuwien.ac.at':
+		if (document.querySelector('input[name="password"]').value)
+			document.querySelector('input[name="password"]').form.submit()
 		break;
 
 	case 'tiss.tuwien.ac.at':
