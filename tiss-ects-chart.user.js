@@ -5,7 +5,7 @@
 // @require     https://cdn.jsdelivr.net/npm/chart.js@2.8.0
 // @description add charts to TISS certificates
 // @include     https://tiss.tuwien.ac.at/graduation/certificates.xhtml*
-// @version     1.2
+// @version     1.3
 // @downloadURL https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // @updateURL   https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // ==/UserScript==
@@ -27,6 +27,7 @@ function mapGrade(grade) {
     switch(grade) {
         case "nicht genügend":
         case "unsatisfactory":
+        case "insufficient":
             ans = 5;
             break;
         case "genügend":
