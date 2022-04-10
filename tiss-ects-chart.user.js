@@ -27,6 +27,7 @@ function mapGrade(grade) {
     switch(grade) {
         case "nicht genügend":
         case "unsatisfactory":
+        case "insufficient":
             ans = 5;
             break;
         case "genügend":
