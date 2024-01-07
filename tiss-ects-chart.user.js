@@ -10,7 +10,7 @@
 // @updateURL   https://fsinf.at/userscripts/tiss-ects-chart.user.js
 // ==/UserScript==
 
-var table = document.querySelector("#certificateList\\:j_id_3p > div > table")
+var table = document.querySelector("form #certificateList\\:certificatesPanel table")
 
 function findTerm(date) {
     let splitted = date.split('.');
