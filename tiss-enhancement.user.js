@@ -157,8 +157,8 @@ if (page == "education/favorites") {
 
     a.appendChild(img);
 
-    var favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
-    favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
+    var favoritesLinksPanel = row.getElementsByClassName("favoritesLinksPanel")[0];
+    favoritesLinksPanel.insertBefore(a, favoritesLinksPanel.childNodes[0]);
 
     a = document.createElement("a");
     a.href = vowi_link(tissID);
@@ -174,9 +174,9 @@ if (page == "education/favorites") {
 
     a.appendChild(img);
 
-    favoritesLinks = row.getElementsByClassName("favoritesLinks")[0];
-    favoritesLinks.insertBefore(a, favoritesLinks.childNodes[0]);
-    favoritesLinks.style = "width: 120px !important";
+    favoritesLinksPanel = row.getElementsByClassName("favoritesLinksPanel")[0];
+    favoritesLinksPanel.insertBefore(a, favoritesLinksPanel.childNodes[0]);
+    favoritesLinksPanel.style = "width: 120px !important";
 
     var tuwel = row.querySelector("img[title='TUWEL']");
     if (tuwel !== null) {
