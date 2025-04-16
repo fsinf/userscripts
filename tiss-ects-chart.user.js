@@ -28,6 +28,8 @@ function mapGrade(grade) {
         case "nicht genügend":
         case "unsatisfactory":
         case "insufficient":
+        case "ohne Erfolg teilgenommen":
+        case "unsuccessfully completed":
             ans = 5;
             break;
         case "genügend":
