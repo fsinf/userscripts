@@ -199,7 +199,8 @@ var grade_line_chart = new Chart(newChartContext(), {
                 display: true,
                 ticks: {
                     suggestedMin: 1,
-                    suggestedMax: 5
+                    suggestedMax: 5,
+                    reverse: true
                 }
             }]
         }
