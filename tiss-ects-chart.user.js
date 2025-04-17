@@ -28,6 +28,8 @@ function mapGrade(grade) {
         case "nicht genügend":
         case "unsatisfactory":
         case "insufficient":
+        case "ohne Erfolg teilgenommen":
+        case "unsuccessfully completed":
             ans = 5;
             break;
         case "genügend":
@@ -81,26 +83,29 @@ var tried_sum = 0;
 var weighted_sum = 0;
 var graded_sum = 0;
 for ( var i = 0; i < ects_tried.length; i++ ) {
-    let pass = ects_passed.get(ects_tried[i][0]);
-    pass = (pass == undefined) ? 0 : pass;
+    let term = ects_tried[i][0];
+    let tried = ects_tried[i][1];
+    let pass = ects_passed.get(term) || 0;
+    let weighted = ects_weighted.get(term) || 0;
+    let graded = ects_graded.get(term) || 0;
+
     pass_sum += pass;
-    tried_sum += ects_tried[i][1];
+    tried_sum += tried;
+    weighted_sum += weighted;
+    graded_sum += graded;
 
-    weighted_sum += ects_weighted.get(ects_tried[i][0]);
-    graded_sum += ects_graded.get(ects_tried[i][0]);
-
-    let grade_avg = ects_weighted.get(ects_tried[i][0]) / ects_graded.get(ects_tried[i][0]);
-    let grade_mavg = weighted_sum / graded_sum;
+    let grade_avg = (graded !== 0) ? (weighted / graded).toFixed(2) : null;
+    let grade_mavg = (graded_sum !== 0) ? (weighted_sum / graded_sum).toFixed(2) : null;
 
     ects_data.push({
-        'term': ects_tried[i][0],
-        'tried': ects_tried[i][1],
-        'passed': pass,
-        'avg': (pass_sum / (i+1)).toFixed(2),
-        'passed_sum': pass_sum,
-        'tried_sum': tried_sum,
-        'grade_avg': grade_avg.toFixed(2),
-        'grade_mavg': grade_mavg.toFixed(2)
+        term,
+        tried,
+        passed: pass,
+        avg: (pass_sum / (i+1)).toFixed(2),
+        passed_sum: pass_sum,
+        tried_sum: tried_sum,
+        grade_avg,
+        grade_mavg
     });
 }
 
@@ -196,12 +201,14 @@ var grade_line_chart = new Chart(newChartContext(), {
                 display: true,
                 ticks: {
                     suggestedMin: 1,
-                    suggestedMax: 5
+                    suggestedMax: 5,
+                    reverse: true
                 }
             }]
         }
     }
 });
+
 
 var ects_cumsum_chart = new Chart(newChartContext(), {
     type: 'bar',
