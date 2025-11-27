@@ -3,8 +3,8 @@
 // @namespace   https://fsinf.at/
 // @match       https://tuwel.tuwien.ac.at/*
 // @grant       none
-// @version     1.0
-// @author      -
+// @version     1.1
+// @icon        https://i.imgur.com/gJ9tqWL.png
 // @description Various small improvements to TUWEL including LVA-abbreviations and "Select All" for Kreuzerl
 // @require     https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js
 // ==/UserScript==
@@ -28,6 +28,7 @@ const seperator = "<b> » </b>"
 
 const courseTileSelector = 'a.coursename[href*="https://tuwel.tuwien.ac.at/course/view.php?id="] > span.multiline > span[aria-hidden="true"]';
 const courseListSelector = 'a.coursename[href*="https://tuwel.tuwien.ac.at/course/view.php?id="]'
+const mobileDrawerSelector = 'div.drawer a.list-group-item[href*="https://tuwel.tuwien.ac.at/course/view.php?id="]'
 const courseTitleSelector = 'h1.h2.mb-0'
 const courseDropdownMenuItemSelector = 'div.carousel-inner > a.dropdown-item[role="menuitem"][href*="https://tuwel.tuwien.ac.at/course/view.php?id="]';
 const breadcrumbSelector = 'li.breadcrumb-item:first > a';
@@ -134,8 +135,9 @@ function tickSubmissionStatement() {
 
 
 function init() {
-  const pathname = window.location.pathname;
+  const href = window.location.href;
 
+  editGeneric(mobileDrawerSelector);
   editGeneric(courseDropdownMenuItemSelector);
   //set dropdown text to blue color to stand out more (OG TUWEL blue: #006699, no contrast on hover)
   $(courseDropdownMenuItemSelector + " b.shortLvaName").css("color", "#013d5b");
@@ -143,26 +145,28 @@ function init() {
   editBreadcrumb(breadcrumbSelector);
 
   //if "my courses" page is open
-  if (pathname.startsWith("/my")) {
+  if (href.contains("/my")) {
     // wait for content to load on "my courses"
     setTimeout(() => { editGeneric(courseTileSelector) }, 1600);
     setTimeout(() => { editGeneric(courseListSelector) }, 1600);
   }
 
+  console.log(pathname);
   //if course main page is open
-  if (pathname.startsWith("/course/view.php?id=")) {
+  if (href.contains("/course/view.php?id=")) {
     editGeneric(courseTitleSelector);
+    console.log("AAA");
   }
 
-  if (pathname.startsWith("/mod/quiz/review.php")) {
+  if (href.contains("/mod/quiz/review.php")) {
     highlightQuizResult();
   }
 
-  if (pathname.startsWith("/mod/checkmark")) {
+  if (href.contains("/mod/checkmark")) {
     addtickAllKreuzerlButton();
   }
 
-  if (pathname.startsWith("/mod/assign/view.php")) {
+  if (href.contains("/mod/assign/view.php")) {
     tickSubmissionStatement();
   }
 
