@@ -3,7 +3,7 @@
 // @namespace   https://fsinf.at/
 // @match       https://tuwel.tuwien.ac.at/*
 // @grant       none
-// @version     1.2
+// @version     1.3
 // @icon        https://i.imgur.com/gJ9tqWL.png
 // @description Various small improvements to TUWEL including LVA-abbreviations and "Select All" for Kreuzerl
 // @require     https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js
@@ -132,10 +132,15 @@ function tickSubmissionStatement() {
   $("input#id_submissionstatement").prop('checked', true);
 }
 
+function smallerEditButton() {
+  $("label[for$='-editingswitch']").replaceWith("<i class='icon fa fa-edit fa-fw'></i>");
+}
 
 
 function init() {
   const href = window.location.href;
+
+  smallerEditButton();
 
   editGeneric(mobileDrawerSelector);
   editGeneric(courseDropdownMenuItemSelector);
