@@ -3,7 +3,7 @@
 // @namespace   https://fsinf.at/
 // @match       https://tuwel.tuwien.ac.at/*
 // @grant       none
-// @version     1.1
+// @version     1.2
 // @icon        https://i.imgur.com/gJ9tqWL.png
 // @description Various small improvements to TUWEL including LVA-abbreviations and "Select All" for Kreuzerl
 // @require     https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js
@@ -88,7 +88,7 @@ function editBreadcrumb(selector) {
 // highlight quiz result
 
 function highlightQuizResult() {
-  gradeCell = "table.quizreviewsummary tr:contains('Bewertung') > td"
+  gradeCell = "table.quizreviewsummary tr:includes('Bewertung') > td"
 
   if ($(gradeCell).text().includes("100%")) {
     $(gradeCell).css("background-color", "lightgreen");
@@ -145,28 +145,26 @@ function init() {
   editBreadcrumb(breadcrumbSelector);
 
   //if "my courses" page is open
-  if (href.contains("/my")) {
+  if (href.includes("/my")) {
     // wait for content to load on "my courses"
     setTimeout(() => { editGeneric(courseTileSelector) }, 1600);
     setTimeout(() => { editGeneric(courseListSelector) }, 1600);
   }
 
-  console.log(pathname);
   //if course main page is open
-  if (href.contains("/course/view.php?id=")) {
+  if (href.includes("/course/view.php?id=")) {
     editGeneric(courseTitleSelector);
-    console.log("AAA");
   }
 
-  if (href.contains("/mod/quiz/review.php")) {
+  if (href.includes("/mod/quiz/review.php")) {
     highlightQuizResult();
   }
 
-  if (href.contains("/mod/checkmark")) {
+  if (href.includes("/mod/checkmark")) {
     addtickAllKreuzerlButton();
   }
 
-  if (href.contains("/mod/assign/view.php")) {
+  if (href.includes("/mod/assign/view.php")) {
     tickSubmissionStatement();
   }
 
