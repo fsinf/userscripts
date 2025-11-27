@@ -3,7 +3,7 @@
 // @namespace   https://fsinf.at/
 // @match       https://tuwel.tuwien.ac.at/*
 // @grant       none
-// @version     1.3
+// @version     1.4
 // @icon        https://i.imgur.com/gJ9tqWL.png
 // @description Various small improvements to TUWEL including LVA-abbreviations and "Select All" for Kreuzerl
 // @require     https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js
@@ -140,9 +140,9 @@ function smallerEditButton() {
 function init() {
   const href = window.location.href;
 
-  smallerEditButton();
 
   editGeneric(mobileDrawerSelector);
+
   editGeneric(courseDropdownMenuItemSelector);
   //set dropdown text to blue color to stand out more (OG TUWEL blue: #006699, no contrast on hover)
   $(courseDropdownMenuItemSelector + " b.shortLvaName").css("color", "#013d5b");
@@ -151,6 +151,7 @@ function init() {
 
   //if "my courses" page is open
   if (href.includes("/my")) {
+    smallerEditButton();
     // wait for content to load on "my courses"
     setTimeout(() => { editGeneric(courseTileSelector) }, 1600);
     setTimeout(() => { editGeneric(courseListSelector) }, 1600);
