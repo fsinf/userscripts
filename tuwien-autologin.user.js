@@ -4,12 +4,14 @@
 // @include     https://tiss.tuwien.ac.at/*
 // @include     https://tuwel.tuwien.ac.at/*
 // @include     https://oc-presentation.ltcc.tuwien.ac.at/*
-// @match       https://idp.zid.tuwien.ac.at/simplesaml/module.php/core/loginuserpass.php
+// @match       https://idp.zid.tuwien.ac.at/simplesaml/module.php/core/loginuserpass*
 // @match       https://toss.fsinf.at/
+// @match       https://memory.iguw.tuwien.ac.at/login
 // @grant       none
-// @version     1.7
+// @version     1.8
 // @downloadURL https://fsinf.at/userscripts/tuwien-autologin.user.js
 // @updateURL   https://fsinf.at/userscripts/tuwien-autologin.user.js
+// @description Note: you need to have password auto fill-in enabled in your browser
 // ==/UserScript==
 
 function tuwelRefreshSession() {
@@ -32,9 +34,16 @@ async function openCastAutoLogin(){
 
 switch(location.host){
 	case 'idp.zid.tuwien.ac.at':
-		if (document.querySelector('input[name="password"]').value)
-			document.querySelector('input[name="password"]').form.submit()
-		break;
+    setTimeout(function() {
+      if (document.querySelector('input[name="password"]').value) {
+   			document.querySelector('input[name="password"]').form.submit()
+      } else {
+        console.warn("Autologin-Script: PW field is empty. Is auto-fill enabled in browser?");
+      }
+    }, 500);
+
+    break;
+
 
 	case 'tiss.tuwien.ac.at':
 		if (document.getElementsByClassName("loading").length > 0) {
@@ -49,8 +58,13 @@ switch(location.host){
 		break;
 
 	case 'tuwel.tuwien.ac.at':
-		if (location.pathname == "/theme/university_boost/login/index.php") {
-			document.querySelector("a[title='TU Wien Login']").click();
+		if (location.pathname == "/login/index.php") {
+      document.querySelectorAll('a').forEach(a => {
+        if (a.textContent.trim() === 'TU Wien Login') {
+          a.click();
+        }
+      });
+
 		} else {
 			tuwelRefreshSession();
 		}
@@ -69,4 +83,17 @@ switch(location.host){
 	case 'toss.fsinf.at':
 		hasTES = true;
 		break;
-}
+
+	// Denki Schlüsselbegriff-Quiz
+	case 'memory.iguw.tuwien.ac.at':
+	if (location.pathname == "/login") {
+		setTimeout(function() {
+			document.querySelectorAll('button').forEach(button => {
+				if (button.textContent.trim() === 'Mit TU Wien SSO anmelden') {
+					button.click();
+				}
+			});
+		}, 1000);
+	}
+	break;
+  }
