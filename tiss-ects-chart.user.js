@@ -22,6 +22,7 @@ function findTerm(date) {
     return (year.toString()).concat(term);
 }
 
+
 function mapGrade(grade) {
     var ans;
     switch(grade) {
@@ -55,8 +56,15 @@ function mapGrade(grade) {
 }
 
 var data = [];
+var studycodes = new Set();
+var currentstudycode = localStorage.getItem("studypreference")
 for ( var i = 1; i < table.rows.length; i++ ) {
-    if (table.rows[i].cells[4].innerText == "") continue;
+    if (i==1 && currentstudycode == null) {
+        localStorage.setItem("studypreference", table.rows[i].cells[6].innerText);
+        currentstudycode = table.rows[i].cells[6].innerText;
+    }
+    studycodes.add(table.rows[i].cells[6].innerText);
+    if (table.rows[i].cells[4].innerText == "" || table.rows[i].cells[6].innerText != currentstudycode) continue;
     data.push({
         'hours': table.rows[i].cells[3].innerText,
         'ects': parseFloat(table.rows[i].cells[4].innerText),
@@ -66,6 +74,7 @@ for ( var i = 1; i < table.rows.length; i++ ) {
         'term': findTerm(table.rows[i].cells[5].innerText)
     });
 }
+
 
 var data_passed = data.filter(function(d) { return d.grade != 5; })
 var data_weighted = data.filter(function(d) { return d.grade != 0 && d.grade != 5; })
@@ -110,6 +119,7 @@ for ( var i = 0; i < ects_tried.length; i++ ) {
 }
 
 const canvas_container = document.createElement("div");
+
 
 function newChartContext(){
   var canvas = document.createElement("canvas");
@@ -235,4 +245,34 @@ var ects_cumsum_chart = new Chart(newChartContext(), {
     }
 });
 
-document.querySelector("#certificateList\\:studentInfoPanel").appendChild(canvas_container);
+function onSelectedStudyCode(event){
+    localStorage.setItem("studypreference", event.target.value);
+    window.location.reload();
+}
+
+const querySelector = document.querySelector("#certificateList\\:studentInfoPanel");
+
+let selectcontainerdiv = document.createElement("div");
+
+let selectcontainer = document.createElement("select");
+
+selectcontainerdiv = querySelector.appendChild(selectcontainerdiv);
+
+selectcontainer = selectcontainerdiv.appendChild(selectcontainer);
+
+selectcontainer.id = "studycodeselect";
+
+selectcontainer.addEventListener("change", onSelectedStudyCode);
+
+studycodes.forEach(studycode => {
+    const optioncontainer = document.createElement("option");
+    const option = selectcontainer.appendChild(optioncontainer);
+    option.value = studycode;
+    option.text = studycode;
+    if(studycode == currentstudycode){
+        option.selected = true;
+    }
+});
+
+querySelector.appendChild(canvas_container);
+
