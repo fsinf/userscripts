@@ -2,8 +2,8 @@
 // @name         TUWEL LectureTube Speed Controls
 // @match        https://tuwel.tuwien.ac.at/mod/opencast/view.php*
 // @namespace    https://fsinf.at/
-// @version      2.2
-// @description  add custom replay speed controls, replacing the default ones
+// @version      2.3
+// @description  add custom replay speed controls, replacing the default ones, adds screenshot buttons
 // @author       Blacklist
 // @grant        none
 // @run-at       document-idle
@@ -13,12 +13,144 @@
   'use strict';
 
   function run() {
+    function getCurrentFrameBlob() {
+      return new Promise((resolve, reject) => {
+        try {
+          const video = iframeDoc.querySelector("video");
+
+          if (!video) {
+            reject(new Error("No video found"));
+            return;
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(video, 0, 0);
+
+          canvas.toBlob(blob => {
+            if (!blob) {
+              reject(new Error("Failed to create image"));
+              return;
+            }
+            resolve(blob);
+          }, "image/png");
+        }
+        catch (err) {
+          reject(err);
+        }
+      });
+    }
+
+    async function saveScreenshot() {
+      try {
+        const blob = await getCurrentFrameBlob();
+
+        const a = document.createElement("a");
+        const timestamp = new Date()
+          .toISOString()
+          .replace(/[:.]/g, "-");
+
+        a.href = URL.createObjectURL(blob);
+        a.download = `lecture-screenshot-${timestamp}.png`;
+        a.click();
+
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      }
+      catch (err) {
+        console.error(err);
+        alert("Screenshot failed (possibly CORS protected).");
+      }
+    }
+
+    async function copyScreenshot() {
+      try {
+        const blob = await getCurrentFrameBlob();
+
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "image/png": blob
+          })
+        ]);
+
+        console.log("Screenshot copied to clipboard");
+      }
+      catch (err) {
+        console.error(err);
+        alert("Copy failed (clipboard or CORS restriction).");
+      }
+    }
+    function addScreenshotButtons() {
+      if (iframeDoc.getElementById("blacklist-screenshot-save")) {
+        return;
+      }
+
+      const speedButton =
+        iframeDoc.querySelector(
+          'button[name="es.upv.paella.playbackRateButton"]'
+        );
+
+      if (!speedButton) {
+        return;
+      }
+
+      const speedContainer =
+        speedButton.closest(".button-plugin-container");
+
+      if (!speedContainer) {
+        return;
+      }
+
+      function createButton(id, text, title, handler) {
+        const container = iframeDoc.createElement("div");
+        container.className = "button-plugin-container";
+
+        container.innerHTML = `
+      <div class="button-plugin-side-area left-side"></div>
+      <button
+        type="button"
+        id="${id}"
+        class="button-plugin dynamic-width no-icon"
+        title="${title}">
+        <div class="interactive-button-content">
+          <span class="button-title button-title-large">${text}</span>
+        </div>
+      </button>
+      <div class="button-plugin-side-area right-side"></div>
+    `;
+
+        container
+          .querySelector("button")
+          .addEventListener("click", handler);
+
+        return container;
+      }
+
+      const copyBtn = createButton(
+        "blacklist-screenshot-copy",
+        "📋",
+        "Copy frame to clipboard",
+        copyScreenshot
+      );
+
+      const saveBtn = createButton(
+        "blacklist-screenshot-save",
+        "💾",
+        "Save frame as PNG",
+        saveScreenshot
+      );
+
+      speedContainer.after(saveBtn);
+      speedContainer.after(copyBtn);
+    }
 
     function showAutoAlert() {
       const div = document.createElement("div");
       div.style.cssText = "position:fixed;top:40px;right:40px;z-index:999999;background:rgba(0,0,0,0.85);color:#fff;padding:14px 18px;border-radius:10px;font-size:14px;font-family:sans-serif;box-shadow:0 4px 12px rgba(0,0,0,0.35);transition:opacity 0.3s;min-width:180px;";
       const title = document.createElement("div");
-      title.innerText = "TUWEL Speed Menu v2.1";
+      title.innerText = "TUWEL Speed Menu v2.3";
       title.style.cssText = "font-weight:600;margin-bottom:4px;";
       const sub = document.createElement("div");
       sub.innerText = "by Blacklist";
@@ -172,6 +304,17 @@
     });
 
     observer.observe(iframeDoc.body, { childList: true, subtree: true });
+
+    addScreenshotButtons();
+
+    const controlBarObserver = new MutationObserver(() => {
+      addScreenshotButtons();
+    });
+
+    controlBarObserver.observe(iframeDoc.body, {
+      childList: true,
+      subtree: true
+    });
 
     showAutoAlert();
     return true;
