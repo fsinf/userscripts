@@ -4,8 +4,8 @@
 // @match       https://tuwel.tuwien.ac.at/mod/opencast/view.php*
 // @grant       GM_xmlhttpRequest
 // @connect     tuwien.ac.at
-// @connect     fsinf.at
-// @version     1.2
+// @connect     raw.githubusercontent.com
+// @version     1.3
 // @author      FSINF
 // @description 3/14/2026, 5:18:42 PM
 // @downloadURL https://fsinf.at/userscripts/tuwel-video-download.user.js
@@ -137,7 +137,8 @@ function gmFetchBlob(url, onprogress) {
   });
 }
 
-const FFMPEG_BASE = "https://fsinf.at/userscripts/assets/ffmpeg";
+const FFMPEG_BASE =
+  "https://raw.githubusercontent.com/fsinf/userscripts/master/assets/ffmpeg";
 const FFMPEG_URLS = {
   ffmpeg: `${FFMPEG_BASE}/ffmpeg.js`,
   classWorker: `${FFMPEG_BASE}/814.ffmpeg.js`,
@@ -284,7 +285,7 @@ function showProcessingBanner(container, onAccept) {
 
   const text = document.createElement("span");
   text.textContent =
-    "This loads ffmpeg.wasm" +
+    "This loads ffmpeg.wasm " +
     "and merges the video locally in your browser's memory. " +
     "Very large videos (around 1 GB and up) may fail.";
 
